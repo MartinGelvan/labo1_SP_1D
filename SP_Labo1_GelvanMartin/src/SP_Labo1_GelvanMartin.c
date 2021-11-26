@@ -35,7 +35,7 @@ int main()
 
     LinkedList* listaPerros = ll_newLinkedList();
     do{
-    	pedirEntero(&option, "1.Cargar los datos de los perros desde el archivo perros.csv (modo texto)\n"
+    	pedirEntero(&option, "1.Cargar los datos de los perros desde el archivo perritos200.csv (modo texto)\n"
     			 "2.Ordenar perros\n"
     			"3.Realizar Mapeo\n"
     		     "4.Listar Perros con sus raciones\n"
@@ -43,7 +43,7 @@ int main()
     		     "6. Guardar en forma de texto\n"
     		     "7. Salir\n"
     		    "Elija la opcion: ", "Error, esa opcion no existe, reingrese la opcion\n"
-    		    "1. Cargar los datos de los perros desde el archivo perros.csv (modo texto)\n"
+    		    "1. Cargar los datos de los perros desde el archivo perritos200.csv (modo texto)\n"
 				 "2.Ordenar perros\n"
 				 "3.Realizar Mapeo\n"
 				 "4.Listar Perros con sus raciones\n"
