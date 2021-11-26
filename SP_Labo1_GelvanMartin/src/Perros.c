@@ -54,7 +54,7 @@ Perro* perro_newParametros(char* idStr,char* nombreStr,char* pesoStr,char* edadS
 		validacion_Numero(edadStr);
 		EdadTransformado=atoi(edadStr);
 		perro_setEdad(pPerro, EdadTransformado);
-		pesoTransformado=atof(edadStr);
+		pesoTransformado=atof(pesoStr);
 		perro_setPeso(pPerro, pesoTransformado);
 		perro_setRaza(pPerro, razaStr);
 
@@ -99,6 +99,48 @@ int perro_getId(Perro* this,int* id)
 	if(this!=NULL && id!=NULL)
 	{
 		*id=this->id;
+		retorno=1;
+	}
+
+	return retorno;
+}
+
+/**
+ * @fn int employee_setId(Employee*, int)
+ * @brief Seteo el ID
+ *
+ * @param this recibe algo de tipo empleado
+ * @param id recibe un id
+ * @return Me retorna 1 si lo pudo settear
+ */
+int perro_setRacionesDeComida(Perro* this,float raciones)
+{
+	int retorno=0;
+
+	if(this!=NULL)
+	{
+		this->racionesDeComida=raciones;
+		retorno=1;
+	}
+
+	return retorno;
+}
+
+/**
+ * @fn int employee_getId(Employee*, int*)
+ * @brief Obtengo un ID
+ *
+ * @param this Recibe algo del tipo empleado
+ * @param id recibe un id
+ * @return Me retorna 1 si lo pudo obtener
+ */
+int perro_getRacionesDeComida(Perro* this,float* raciones)
+{
+	int retorno=0;
+
+	if(this!=NULL && raciones!=NULL)
+	{
+		*raciones=this->racionesDeComida;
 		retorno=1;
 	}
 
@@ -535,7 +577,30 @@ int filtroRazaGolden(void* pElement)
 
 }
 
+int filtroGalgoMasDe10AniosMenos200Gramos(void* pElement)
+{
+	int retorno=-1;
+	char raza[128];
+	int edad;
+	float raciones;
 
+	Perro* auxPerro;
+	if(pElement!=NULL)
+	{
+		auxPerro=(Perro*)pElement;
+		perro_getRaza(auxPerro, raza);
+		perro_getEdad(auxPerro,&edad );
+		perro_getRacionesDeComida(auxPerro,&raciones );
+
+		if(strcmp(raza,"Female")==0)
+		{
+			retorno=0;
+		}
+	}
+
+	return retorno;
+
+}
 
 int filtroEdad(void* pElement)
 {
@@ -572,39 +637,61 @@ int ePerrito_laQueMapea(void* perro)
 		auxPerro=(Perro*)perro;
 		perro_getPeso(auxPerro, &peso);
 		pesoCalculado=peso*23;
-		perro_setPeso(auxPerro, pesoCalculado);
+		perro_setRacionesDeComida(auxPerro,pesoCalculado);
 
 		retorno=1;
 	}
 	return retorno;
 }
 
-int perro_ListPerro(Perro* perro)
-{
 
+
+/** \brief Listar empleados
+ *
+ * \param path char*
+ * \param pArrayListEmployee LinkedList*
+ * \return int
+ *
+ */
+int perro_ListPerrosConRaciones(LinkedList* pArrayListPerros)
+{
+	int i;
+	int tam;
 	int auxId;
 	int auxEdad;
+	float auxPeso;
+	float auxRaciones;
 	char auxNombre[120];
 	char auxRaza[120];
-	perro= perro_new();
-
+	Perro* auxPerro;
 	int exito=0;
 
-	printf("%-10s %-10s %-10s %-10s\n","ID","NOMBRE","RAZA","EDAD");
 
-	if(perro!=NULL) //Verifico que pArrayListPerros sea distinto de NULL
+
+	printf("%-10s %-10s %-10s %-10s %-10s %-10s\n","ID","NOMBRE","PESO","EDAD","RAZA","RACIONES COMIDA");
+
+	if(pArrayListPerros!=NULL) //Verifico que pArrayListPerros sea distinto de NULL
 	{
+		tam=ll_len(pArrayListPerros); //guardo el tamaño del array en una variable
 
-		perro_getId(perro, &auxId); //traigo el id del perro
-		perro_getNombre(perro, auxNombre); //traigo el nombre del perro
-		perro_getRaza(perro, auxRaza); //traigo la raza del perro
-		perro_getEdad(perro, &auxEdad); //traigo la edad del perro
-		printf("%-10d %-10s %-10s %-10d\n",auxId,auxNombre,auxRaza,auxEdad); //Imprimo los perros
+		for(i=0;i<tam;i++)
+		{
+			auxPerro=(Perro*)ll_get(pArrayListPerros, i); //Guardo los perros en auxPerro
+
+			perro_getId(auxPerro, &auxId); //traigo el id del perro
+			perro_getNombre(auxPerro, auxNombre); //traigo el nombre del perro
+			perro_getRaza(auxPerro, auxRaza); //traigo la raza del perro
+			perro_getEdad(auxPerro, &auxEdad); //traigo la edad del perro
+			perro_getPeso(auxPerro, &auxPeso);
+			perro_getRacionesDeComida(auxPerro, &auxRaciones);
+			printf("%-10d %-10s %-10f %-10d %-10s %-10f\n",auxId,auxNombre,auxPeso,auxEdad,auxRaza,auxRaciones); //Imprimo los perros
 
 
+		}
 
 		exito=1;
 	}
 
     return exito;
 }
+

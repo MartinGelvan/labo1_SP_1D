@@ -39,8 +39,8 @@ int main()
     int banderaTexto=0;
     int banderaBinario=0;
     LinkedList* listaPerrosFiltradoEdad;
-    LinkedList* listaPerrosFiltradoRaza;
-    LinkedList* listaPerrosMapeado=NULL;
+    //LinkedList* listaPerrosFiltradoRaza;
+   //LinkedList* listaPerrosMapeado=NULL;
 
 
     LinkedList* listaPerros = ll_newLinkedList();
@@ -145,7 +145,7 @@ int main()
 			break;
 
 			case 4:
-
+				perro_ListPerrosConRaciones(listaPerros);
 
 			break;
 
