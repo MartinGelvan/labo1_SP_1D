@@ -34,7 +34,7 @@ Perro* perro_new()
  * @param sueldoStr
  * @return Me retorna un empleado
  */
-Perro* perro_newParametros(char* idStr,char* nombreStr,char* razaStr,char* edadStr, char* pesoStr)
+Perro* perro_newParametros(char* idStr,char* nombreStr,char* pesoStr,char* edadStr, char* razaStr)
 {
 	Perro* pPerro;
 
@@ -570,9 +570,10 @@ int ePerrito_laQueMapea(void* perro)
 	if(perro!=NULL)
 	{
 		auxPerro=(Perro*)perro;
-		peso=auxPerro->peso;
+		perro_getPeso(auxPerro, &peso);
 		pesoCalculado=peso*23;
 		perro_setPeso(auxPerro, pesoCalculado);
+
 		retorno=1;
 	}
 	return retorno;

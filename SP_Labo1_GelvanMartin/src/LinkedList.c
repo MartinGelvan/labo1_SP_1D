@@ -695,7 +695,7 @@ int ll_map(LinkedList* this, int (*pFunc)(void*))
 	int retorno=-1;
 	int tam;
 	int i;
-	void* pElement;
+	void* pElement=NULL;
 
 	if(this!=NULL && pFunc!=NULL)
 	{
@@ -706,6 +706,7 @@ int ll_map(LinkedList* this, int (*pFunc)(void*))
 		{
 			pElement=ll_get(this, i);
 			pFunc(pElement);
+
 		}
 
 		retorno=1;
