@@ -30,7 +30,7 @@ int perro_getRaza(Perro* this,char* raza);
 int perro_setEdad(Perro* this,int edad);
 int perro_getEdad(Perro* this,int* edad);
 
-int perro_setPeso(Perro* this,int peso);
+int perro_setPeso(Perro* this,float peso);
 int perro_getPeso(Perro* this,float* peso);
 
 int perro_setRacionesDeComida(Perro* this,float raciones);
@@ -51,4 +51,5 @@ int filtroEdad(void* pElement);
 int perro_ListPerro(Perro* perro);
 int ePerrito_laQueMapea(void* perro);
 int perro_ListPerrosConRaciones(LinkedList* pArrayListPerros);
+int filtroGalgoMasDe10AniosMenos200Gramos(void* pElement);
 #endif // perros_H_INCLUDED

@@ -15,19 +15,7 @@
 #include "Perros.h"
 #include "Inputs.h"
 
-/****************************************************
-    Menu:
-     1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
-     2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).
-     3. Alta de empleado
-     4. Modificar datos de empleado
-     5. Baja de empleado
-     6. Listar empleados
-     7. Ordenar empleados
-     8. Guardar los datos de los empleados en el archivo data.csv (modo texto).
-     9. Guardar los datos de los empleados en el archivo data.csv (modo binario).
-    10. Salir
-*****************************************************/
+
 
 
 
@@ -37,36 +25,32 @@ int main()
     int option = 10;
     int exito;
     int banderaTexto=0;
-    int banderaBinario=0;
-    LinkedList* listaPerrosFiltradoEdad;
-    //LinkedList* listaPerrosFiltradoRaza;
-   //LinkedList* listaPerrosMapeado=NULL;
+
+    LinkedList* listaPerrosFiltrado;
+    int banderaTerceraOpcion=0;
+    int banderaFiltrado=0;
+    int banderaSegundaOpcion=0;
+
 
 
     LinkedList* listaPerros = ll_newLinkedList();
     do{
     	pedirEntero(&option, "1.Cargar los datos de los perros desde el archivo perros.csv (modo texto)\n"
-    			 "Ordenar perros\n"
-    			"3.Cargar los datos de los perros desde el archivo perros.csv (modo binario)\n"
-    		     "4.\n"
-    		     "5. Listar Perros de mas de 10 años\n"
-    		     "6. Listar perros\n"
-    		     "7. Ordenar perros\n"
-    		     "8. Guardar los datos de los perros en el archivo perros.csv (modo texto)\n"
-    		     "9. Guardar los datos de los perros en el archivo perros.csv (modo binario)\n"
-    		    "10. Salir\n"
-    		    "Elija la opcion: ", "Error, esa opcion no existe, reingrese la opcion.\n"
+    			 "2.Ordenar perros\n"
+    			"3.Realizar Mapeo\n"
+    		     "4.Listar Perros con sus raciones\n"
+    		     "5.Filtrar Perros\n"
+    		     "6. Guardar en forma de texto\n"
+    		     "7. Salir\n"
+    		    "Elija la opcion: ", "Error, esa opcion no existe, reingrese la opcion\n"
     		    "1. Cargar los datos de los perros desde el archivo perros.csv (modo texto)\n"
-				 "2. Cargar los datos de los perros desde el archivo perros.csv (modo binario)\n"
-				 "3. \n"
-				 "4. \n"
-				 "5. Listar Perros de mas de 10 años\n"
-				 "6. Listar perros\n"
-				 "7. Ordenar perros\n"
-				 "8. Guardar los datos de los perros en el archivo perros.csv (modo texto)\n"
-				" 9. Guardar los datos de los perros en el archivo perros.csv (modo binario)\n"
-				"10. Salir\n"
-				"Elija la opcion: ", 1, 10);
+				 "2.Ordenar perros\n"
+				 "3.Realizar Mapeo\n"
+				 "4.Listar Perros con sus raciones\n"
+				 "5.Filtrar Perros\n"
+				 "6. Guardar en forma de texto\n"
+				 "7. Salir\n"
+				"Elija la opcion: ", 1, 7);
 
         switch(option)
         {
@@ -86,104 +70,75 @@ int main()
                 break;
             case 2:
 
-            	if(banderaTexto==1 || banderaBinario==1)
+            	if(banderaTexto==1)
 				{
 					exito=controller_sortPerro(listaPerros);
+
 					if(exito==1)
 					{
 						printf("\nSe ordeno con exito!\n\n");
-						banderaBinario=1;
+						banderaSegundaOpcion=1;
+
 					}else
 					{
 						printf("\nNo se logro ordenar\n");
 					}
 				}else
 				{
-					printf("\nIngrese la opcion 1 primero o la 2\n");
+					printf("\nIngrese la opcion 1 primero\n");
 				}
 				system("pause");
-            /*
-				exito=controller_loadFromBinary("src\\dataBinarioPerros.csv" , listaPerros);
-            	if(exito==1)
-				{
-					printf("\nSe cargo en forma binaria con exito!\n\n");
-					banderaBinario=1;
-				}else
-				{
-					printf("\nNo se logro cargar en forma binaria\n");
-				}
-            	system("pause");
-            	*/
+
 			break;
 
 			case 3:
-
-				ll_map(listaPerros, ePerrito_laQueMapea);
-				//controller_ListPerros(listaPerrosMapeado);
-			/*
-				if(banderaTexto==1 || banderaBinario==1)
+				if(banderaTexto==1 && banderaSegundaOpcion==1)
 				{
-					listaPerrosFiltradoRaza=ll_filtro(listaPerros,filtroRazaGolden);
-
-					if(listaPerrosFiltradoRaza!=NULL)
-					{
-						if((controller_saveAsText("perrosFiltradosPorRazaFemale.csv", listaPerrosFiltradoRaza))==1)
-						{
-							printf("\nLista creada y guardada como perrosFiltradosPorRazaFemale.csv \n");
-						}
-
-						controller_ListPerros(listaPerrosFiltradoRaza);
-					}
-
+					ll_map(listaPerros, ePerrito_laQueMapea);
+					printf("\nSe mapeo con exito!\n");
+					banderaTerceraOpcion=1;
 				}else
 				{
-					printf("\nIngrese la opcion 1 primero o la 2\n");
+					printf("\nIngrese la opcion 1 primero y la 2\n");
 				}
 
-*/
 				system("pause");
 			break;
 
 			case 4:
-				perro_ListPerrosConRaciones(listaPerros);
+				if(banderaTexto==1 && banderaSegundaOpcion==1 && banderaTerceraOpcion==1)
+				{
+					perro_ListPerrosConRaciones(listaPerros);
+				}else
+				{
+					printf("\nIngrese la opcion 1 primero, la 2 y la 3\n");
+				}
+
+				system("pause");
 
 			break;
 
 			case 5:
+				if(banderaTexto==1 &&  banderaSegundaOpcion==1 && banderaTerceraOpcion==1)
+				{
+					listaPerrosFiltrado=ll_filtro(listaPerros, filtroGalgoMasDe10AniosMenos200Gramos);
+					perro_ListPerrosConRaciones(listaPerrosFiltrado);
+					banderaFiltrado=1;
+				}else
+				{
+					printf("\nIngrese la opcion 1 primero , por la 2 y por la 3\n");
+				}
 
-				listaPerrosFiltradoEdad=ll_filtro(listaPerros, filtroEdad);
-				controller_ListPerros(listaPerrosFiltradoEdad);
+
 				system("pause");
 
 			break;
 
 			case 6:
-				if(banderaTexto==1 || banderaBinario==1)
+				if(banderaTexto==1 && banderaSegundaOpcion==1 && banderaTerceraOpcion==1 && banderaFiltrado==1)
 				{
-					exito=controller_ListPerros(listaPerros);
-					if(exito==1)
-					{
-						printf("\nSe mostro la lista con exito!\n\n");
-						banderaBinario=1;
-					}else
-					{
-						printf("\nNo se logro mostrar la lista\n");
-					}
-				}else
-				{
-					printf("\nIngrese la opcion 1 primero o la 2\n");
-				}
-				system("pause");
-			break;
 
-			case 7:
-
-			break;
-
-			case 8:
-				if(banderaTexto==1 || banderaBinario==1)
-				{
-					exito=controller_saveAsText("src\\perritos.csv" , listaPerros);
+					exito=controller_saveAsText("galgosFlaquitos.csv" , listaPerrosFiltrado);
 					if(exito==1)
 					{
 						printf("\nSe guardo en forma de texto con exito!\n\n");
@@ -194,38 +149,19 @@ int main()
 
 				}else
 				{
-					printf("\nIngrese la opcion 1 primero o la 2\n");
+					printf("\nIngrese la opcion 1 primero, la 2, la 3 y por el filtro\n");
 				}
 
 				system("pause");
-			break;
-
-			case 9:
-
-				if(banderaTexto==1 || banderaBinario==1)
-				{
-					exito=controller_saveAsBinary("src\\dataBinarioPerros.csv" ,listaPerros );
-					if(exito==1)
-					{
-						printf("\nSe guardo en forma binaria con exito!\n\n");
-					}else
-					{
-						printf("\nNo se logro guardar en forma binaria\n");
-					}
-
-				}else
-				{
-					printf("\nIngrese la opcion 1 primero o la 2\n");
-				}
-				system("pause");
-			break;
-
-			case 10:
-					printf("\nFinalizado\n");
 
 			break;
+
+			case 7:
+					printf("\nFinalizado!\n");
+			break;
+
         }
-    }while(option != 10);
+    }while(option != 7);
     return 0;
 }
 

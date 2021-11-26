@@ -96,7 +96,7 @@ int controller_ListPerros(LinkedList* pArrayListPerros)
 			perro_getRaza(auxPerro, auxRaza); //traigo la raza del perro
 			perro_getEdad(auxPerro, &auxEdad); //traigo la edad del perro
 			perro_getPeso(auxPerro, &auxPeso);
-			printf("%-10d %-10s %-10f %-10d %-10s\n",auxId,auxNombre,auxPeso,auxEdad,auxRaza); //Imprimo los perros
+			printf("%-10d %-10s %-10.2f %-10d %-10s\n",auxId,auxNombre,auxPeso,auxEdad,auxRaza); //Imprimo los perros
 
 
 		}

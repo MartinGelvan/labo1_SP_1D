@@ -189,14 +189,7 @@ int perro_getNombre(Perro* this,char* nombre)
 	return retorno;
 }
 
-/**
- * @fn int employee_setHorasTrabajadas(Employee*, int)
- * @brief Seteo las Horas Trabajadas
- *
- * @param this Recibe algo de tipo empleado
- * @param horasTrabajadas Recibe las horas trabajadas
- * @return Me retorna 1 si lo pudo settear
- */
+
 int perro_setEdad(Perro* this,int edad)
 {
 	int retorno=0;
@@ -210,14 +203,7 @@ int perro_setEdad(Perro* this,int edad)
 	return retorno;
 }
 
-/**
- * @fn int employee_getHorasTrabajadas(Employee*, int*)
- * @brief Obtengo las Horas Trabajadas
- *
- * @param this this Recibe algo de tipo empleado
- * @param horasTrabajadas Recibe las horas trabajadas
- * @return Me retorna 1 si lo pudo obtener
- */
+
 int perro_getEdad(Perro* this,int* edad)
 {
 	int retorno=0;
@@ -232,15 +218,8 @@ int perro_getEdad(Perro* this,int* edad)
 }
 
 
-/**
- * @fn int employee_setHorasTrabajadas(Employee*, int)
- * @brief Seteo las Horas Trabajadas
- *
- * @param this Recibe algo de tipo empleado
- * @param horasTrabajadas Recibe las horas trabajadas
- * @return Me retorna 1 si lo pudo settear
- */
-int perro_setPeso(Perro* this,int peso)
+
+int perro_setPeso(Perro* this,float peso)
 {
 	int retorno=0;
 
@@ -253,14 +232,7 @@ int perro_setPeso(Perro* this,int peso)
 	return retorno;
 }
 
-/**
- * @fn int employee_getHorasTrabajadas(Employee*, int*)
- * @brief Obtengo las Horas Trabajadas
- *
- * @param this this Recibe algo de tipo empleado
- * @param horasTrabajadas Recibe las horas trabajadas
- * @return Me retorna 1 si lo pudo obtener
- */
+
 int perro_getPeso(Perro* this,float* peso)
 {
 	int retorno=0;
@@ -275,14 +247,7 @@ int perro_getPeso(Perro* this,float* peso)
 }
 
 
-/**
- * @fn int employee_setNombre(Employee*, char*)
- * @brief Seteo el nombre
- *
- * @param this Recibe algo de tipo empleado
- * @param nombre Recibe un nombre
- * @return Me retorna 1 si lo pudo settear
- */
+
 int perro_setRaza(Perro* this,char* raza)
 {
 	int retorno=0;
@@ -296,14 +261,7 @@ int perro_setRaza(Perro* this,char* raza)
 	return retorno;
 }
 
-/**
- * @fn int employee_getNombre(Employee*, char*)
- * @brief Obtengo el nombre
- *
- * @param this Recibe algo del tipo empleado
- * @param nombre Recibe un nombre
- * @return Me retorna 1 si lo pudo obtener
- */
+
 int perro_getRaza(Perro* this,char* raza)
 {
 	int retorno=0;
@@ -592,7 +550,7 @@ int filtroGalgoMasDe10AniosMenos200Gramos(void* pElement)
 		perro_getEdad(auxPerro,&edad );
 		perro_getRacionesDeComida(auxPerro,&raciones );
 
-		if(strcmp(raza,"Female")==0)
+		if((strcmp(raza,"Galgo")==0) && edad>10 && raciones<200)
 		{
 			retorno=0;
 		}
@@ -646,13 +604,7 @@ int ePerrito_laQueMapea(void* perro)
 
 
 
-/** \brief Listar empleados
- *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int perro_ListPerrosConRaciones(LinkedList* pArrayListPerros)
 {
 	int i;
@@ -684,7 +636,7 @@ int perro_ListPerrosConRaciones(LinkedList* pArrayListPerros)
 			perro_getEdad(auxPerro, &auxEdad); //traigo la edad del perro
 			perro_getPeso(auxPerro, &auxPeso);
 			perro_getRacionesDeComida(auxPerro, &auxRaciones);
-			printf("%-10d %-10s %-10f %-10d %-10s %-10f\n",auxId,auxNombre,auxPeso,auxEdad,auxRaza,auxRaciones); //Imprimo los perros
+			printf("%-10d %-10s %-10.2f %-10d %-10s %-10.2f\n",auxId,auxNombre,auxPeso,auxEdad,auxRaza,auxRaciones); //Imprimo los perros
 
 
 		}
